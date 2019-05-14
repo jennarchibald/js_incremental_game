@@ -15,8 +15,9 @@ window.addEventListener('DOMContentLoaded', () => {
   game.bindEvents();
   game.play();
 
+  const title = document.querySelector('title');
   const infoContainer = document.querySelector('.info-wrapper')
-  const infoView = new InfoView(infoContainer);
+  const infoView = new InfoView(infoContainer, title);
   infoView.render();
   infoView.bindEvents();
 

@@ -1,7 +1,8 @@
 const PubSub = require('../helpers/pub_sub');
 
-const InfoView = function(container){
+const InfoView = function(container, title){
   this.container = container;
+  this.title = title;
   this.score = 0;
   this.increment = 0.00;
 }
@@ -15,6 +16,14 @@ InfoView.prototype.bindEvents = function () {
     this.increment = evt.detail;
     this.render();
   })
+  this.renderTitle();
+  window.setInterval(()=> {
+        this.renderTitle();
+  }, 1000);
+};
+
+InfoView.prototype.renderTitle = function () {
+  this.title.textContent = this.score.toFixed(2);
 };
 
 InfoView.prototype.render = function () {
