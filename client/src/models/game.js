@@ -29,18 +29,25 @@ Game.prototype.handleBuy = function (index) {
     this.autos[index].price *= 1.15;
     PubSub.publish("Game:autos-ready", this.autos)
     PubSub.publish('Game:score-updated', this.score);
+    this.calculateIncrement();
   }
 };
 
 Game.prototype.play = function(){
   window.setInterval(() => {
-    let increment = 0;
-    for (auto of this.autos){
-      increment += auto.number * auto.rate;
-    }
+    let increment = this.calculateIncrement() /25;
     this.score += increment;
     PubSub.publish('Game:score-updated', this.score);
-  }, 1000);
+  }, 40);
+}
+
+Game.prototype.calculateIncrement = function(){
+  let increment = 0;
+  for (auto of this.autos){
+    increment += auto.number * auto.rate;
+  }
+  PubSub.publish('Game:increment-updated', increment);
+  return increment;
 }
 
 

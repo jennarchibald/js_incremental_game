@@ -30,7 +30,7 @@ body {
   width: 15vw;
 }
 
-.auto > h2 {
+.auto > h2, .auto > h3, .auto > h4 {
   margin-left: 1vw;
 }
 
